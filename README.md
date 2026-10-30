@@ -4,6 +4,10 @@ Uma aventura single player em pixel art 2D, pensada para celular: explorar um po
 
 **Estado atual: primeira missão jogável — Uma luz para a feira.** Explore o cais, inspecione peças, consulte o catálogo com SQL real e veja o drone iluminar a barraca.
 
+**[Jogar Porto Sucata](https://porto-sucata.vercel.app)**
+
+Publicação atual por upload do build testado. A integração GitHub da Vercel ainda não está instalada nesta conta, portanto um push neste repositório não dispara deploy automaticamente.
+
 ## Executar localmente
 
 Requer Node.js 22.12+ ou 24 e npm.
@@ -21,6 +25,8 @@ npm run test:e2e
 ```
 
 Os testes de navegador usam Microsoft Edge instalado (`channel: msedge`). Ajuste o canal no Playwright para outro Chromium instalado se necessário. As capturas de revisão são geradas em `.impeccable/review/`.
+
+Para verificar um deploy existente, defina `PORTO_BASE_URL` com o endereço dele antes de executar `npm run test:e2e`; nessa configuração o Playwright não inicia servidor local.
 
 ## O que está funcionando
 

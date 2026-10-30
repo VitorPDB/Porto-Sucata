@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-30T03:00:00Z",
+  "title": "Design System: Porto Sucata",
+  "extensions": {
+    "shadows": [
+      {
+        "name": "world-part",
+        "value": "0 3px 5px #263c3a30",
+        "purpose": "Peças sobre o cenário."
+      },
+      {
+        "name": "modal",
+        "value": "0 16px 60px #132a2850",
+        "purpose": "Modal acima do mundo."
+      }
+    ],
+    "motion": [
+      {
+        "name": "player",
+        "value": "left .7s ease-out, top .7s ease-out",
+        "purpose": "Deslocamento de pose estática."
+      },
+      {
+        "name": "lamp",
+        "value": "opacity 1.2s",
+        "purpose": "Iluminação após entrega."
+      },
+      {
+        "name": "drone-step",
+        "value": "2400ms",
+        "purpose": "Duas etapas no controlador; preferência reduzida usa 800ms por etapa com salto."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-max",
+        "value": "899px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal de largura total.",
+      "html": "<button class=\"ds-primary\">Testar seleção</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:12px 17px;border-radius:5px;border:1px solid var(--line,#c8c0b0);font:600 14px/1.45 'DM Sans',sans-serif;text-align:center;cursor:pointer;width:100%;background:var(--teal,#294b48);color:var(--paper,#f3ebdd);border-color:var(--teal,#294b48)}.ds-primary:hover{background:#203d3b}.ds-primary:focus-visible{outline:3px solid var(--rust,#87563e);outline-offset:4px}.ds-primary:disabled{opacity:.6;cursor:wait}"
+    },
+    {
+      "name": "Secondary button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ação secundária com borda.",
+      "html": "<button class=\"ds-secondary\">Ajustar consulta</button>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:12px 17px;border-radius:5px;border:1px solid var(--line,#c8c0b0);font:600 14px/1.45 'DM Sans',sans-serif;text-align:center;cursor:pointer;background:transparent;color:var(--ink,#263c3a)}.ds-secondary:hover{background:#e5dece}.ds-secondary:focus-visible{outline:3px solid var(--rust,#87563e);outline-offset:4px}"
+    },
+    {
+      "name": "Text button",
+      "kind": "button",
+      "description": "Ajuda e retorno.",
+      "html": "<button class=\"ds-text\">Pedir uma pista</button>",
+      "css": ".ds-text{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:12px 17px;border-radius:5px;border:1px solid var(--line,#c8c0b0);font:600 14px/1.45 'DM Sans',sans-serif;text-align:center;cursor:pointer;background:transparent;color:var(--ink,#263c3a);border-color:transparent;font-weight:500;padding-left:0;padding-right:0}.ds-text:hover{text-decoration:underline;text-underline-offset:4px}.ds-text:focus-visible{outline:3px solid var(--rust,#87563e);outline-offset:4px}"
+    },
+    {
+      "name": "SQL editor",
+      "kind": "input",
+      "refersTo": "editor",
+      "description": "Campo SQL legível sem realce sintático.",
+      "html": "<textarea class=\"ds-editor\" aria-label=\"Sua consulta\" spellcheck=\"false\">SELECT id, nome\nFROM pecas;</textarea>",
+      "css": ".ds-editor{width:100%;min-height:162px;resize:vertical;border:1px solid #a7ac9d;background:#faf6ec;color:var(--ink,#263c3a);font:16px/1.7 Consolas,'Courier New',monospace;padding:15px 12px;border-radius:5px;caret-color:var(--teal,#294b48);tab-size:2}.ds-editor:focus-visible{outline:3px solid var(--rust,#87563e);outline-offset:4px}"
+    },
+    {
+      "name": "Command chip",
+      "kind": "chip",
+      "description": "Inserção de comando; 38px desktop e 44px móvel.",
+      "html": "<button class=\"ds-chip\">WHERE</button>",
+      "css": ".ds-chip{background:var(--soft,#e6dfd1);color:#34473d;border:1px solid var(--line,#c8c0b0);border-radius:4px;min-height:38px;padding:7px 9px;font:12px Consolas,monospace;cursor:pointer}.ds-chip:focus-visible{outline:3px solid var(--rust,#87563e);outline-offset:4px}.ds-chip:disabled{opacity:.6;cursor:wait}@media(max-width:899px){.ds-chip{min-height:44px}}"
+    },
+    {
+      "name": "Terminal tabs",
+      "kind": "nav",
+      "description": "Aba atual explícita; snippet visual, sem controlador de navegação.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\" aria-label=\"Bancada\"><button role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">Pedido</button><button role=\"tab\" aria-selected=\"true\">Código</button><button role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">Dados</button></div>",
+      "css": ".ds-tabs{display:flex;margin:23px 0;border-bottom:1px solid var(--line,#c8c0b0);gap:5px}.ds-tabs button{min-height:44px;flex:1;border:0;background:transparent;color:var(--muted,#59635a);padding:10px;border-radius:5px 5px 0 0;font:500 14px 'DM Sans',sans-serif;cursor:pointer}.ds-tabs button[aria-selected=true]{background:var(--teal,#294b48);color:var(--paper,#f3ebdd);font-weight:600}.ds-tabs button:focus-visible{outline:3px solid var(--rust,#87563e);outline-offset:4px}"
+    },
+    {
+      "name": "Result feedback",
+      "kind": "custom",
+      "description": "Resultado correto, nomes e próximo passo; superfície plana.",
+      "html": "<div class=\"ds-feedback\" role=\"status\"><h3>Pronto para levar!</h3><p>As duas lâmpadas funcionando estão selecionadas.</p><div><span>Lâmpada A</span> <span>Lâmpada C</span></div></div>",
+      "css": ".ds-feedback{padding-top:20px;margin-top:20px;border-top:1px solid var(--line,#c8c0b0);color:var(--ink,#263c3a);font-family:'DM Sans',sans-serif}.ds-feedback h3{color:#285441;font-size:17px;line-height:1.4;font-weight:600;margin:0 0 8px}.ds-feedback p{font-size:14px;line-height:1.65;margin:0 0 18px}.ds-feedback span{font-size:12px;padding:5px 8px;background:#e1e5d7;color:#294b48;border-radius:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Uma oficina acolhedora no cais",
+    "overview": "Registro do primeiro recorte jogável; tokens extraídos da implementação, sem redesenho.",
+    "keyCharacteristics": [
+      "Pixel art contida no mundo, tipografia limpa na interface.",
+      "Creme e petróleo dominantes, ferrugem discreta e luz âmbar pontual.",
+      "Seleção identificável por texto, contorno e marcas, além da cor.",
+      "Exploração, bancada e consequência com hierarquias próprias."
+    ],
+    "rules": [
+      {
+        "name": "Muted Harbor",
+        "body": "Preserve as cores contidas; não introduza neon, arco-íris ou grandes superfícies muito saturadas.",
+        "section": "colors"
+      },
+      {
+        "name": "Readable Code",
+        "body": "Preserve o editor em 16px e deixe o cenário recolher antes de comprimir a escrita.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do preservar elenco, materiais e paleta das referências existentes.",
+      "Do manter código legível e recolher o mundo na bancada móvel.",
+      "Do acompanhar seleção, erro e sucesso com texto ou marcas explícitas.",
+      "Do comparar mudanças com as capturas e com a implementação atual."
+    ],
+    "donts": [
+      "Don't aumentar saturação para sinalizar progresso.",
+      "Don't substituir mundo interativo por uma prancha conceitual.",
+      "Don't anunciar animação direcional, campanha ou suporte SQL não implementados.",
+      "Don't apagar rascunho ou conquistas após uma tentativa incorreta."
+    ]
+  }
+}

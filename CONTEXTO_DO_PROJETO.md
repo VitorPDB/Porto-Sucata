@@ -64,7 +64,7 @@ Abrir as imagens antes de modificar o visual:
 - Personagens expressivos com silhuetas distintas e proporções estilizadas. Não reduzir todos a avatares genéricos idênticos.
 - Mundo em petróleo/teal, creme e ferrugem. Âmbar para iluminação, interação e recompensa; vegetação discreta.
 - Última instrução do usuário: **não usar cores muito vibrantes**. Não reinterpretar as pranchas como autorização para saturação forte, neon ou excesso de brilhos.
-- Proposta inicial para tokens de UI, ainda a verificar em telas reais: fundo creme `#F3EBDD`, tinta `#263C3A`, petróleo `#294B48`, ferrugem `#9B624A`, âmbar discreto `#B58A4D`, superfície secundária `#DDD5C7`.
+- Tokens implementados (DESIGN.md e src/style.css): fundo creme `#F3EBDD`, tinta `#263C3A`, petróleo `#294B48`, ferrugem `#87563E`, âmbar declarado `#B58A4D`, superfície secundária `#E6DFD1`. Estes substituem os valores preliminares de ferrugem/superfície. As luzes do cenário usam o acento específico `#E0B870` com opacidade, registrado no design.
 - Âmbar é acento, não cor padrão de texto. Medir contraste de cada combinação antes de usá-la em controles/texto.
 - Não impor os seis tokens a todos os pixels da arte: sombras e variações moderadas são necessárias. UI deve manter pouca variedade.
 - Retratos e mundo podem ser pixelados; código, diálogos, números e botões precisam de fonte limpa e tamanho legível.
@@ -289,7 +289,7 @@ Esse dataset não é o inventário ficcional de peças. Não trocar seus dados s
 - Ele continha três lições introdutórias, biblioteca de textos, oito questões de múltipla escolha, progresso local e seleção ativa. Não era o curso completo e não executava SQL real.
 - Não copiar essas limitações como requisitos do novo jogo nem anunciar que Porto Sucata já está publicado naquela URL.
 - O projeto Vercel "so na rede" pertence ao usuário e não pode ser alterado. O nome de equipe semelhante não deve ser confundido com autorização para modificar esse projeto.
-- A publicação deste primeiro recorte deve usar um projeto Vercel separado chamado porto-sucata. A configuração efetiva e o endereço verificado serão registrados quando a publicação terminar. Não alterar os dois projetos anteriores.
+- Primeiro recorte publicado no projeto Vercel separado `porto-sucata`: `https://porto-sucata.vercel.app`. Deploy `dpl_BMkZ4QzBhtu5tXYKMx2ZQqnP962w`, estado READY. O build foi enviado diretamente, sem conexão automática GitHub. Não alterar os dois projetos anteriores.
 
 ## 14. Decisões em aberto
 
@@ -347,3 +347,6 @@ Esse dataset não é o inventário ficcional de peças. Não trocar seus dados s
 - Criado projeto Vercel separado `porto-sucata`, ID `prj_KZser93HmHNBbRFfa8veynMQrDYN`, equipe `team_VneHRHB9ulmmfjjE6Z4ECNxb`. Os projetos antigos não foram modificados.
 - A tentativa de conectar o repositório foi recusada pela Vercel porque falta instalar a integração GitHub naquela conta. Isso é diferente de ausência de commits no GitHub. O projeto foi criado sem integração Git; publicação será por upload do build estático testado. Sem deploy automático a cada push até conectar a integração.
 - Commit/push desta implementação e upload do build são etapas distintas; confirmar ambos antes de anunciar a versão disponível.
+- Confirmado: commit da implementação `ba062ed` enviado a `origin/main`; Vercel respondeu READY com alias `porto-sucata.vercel.app`. DESIGN.md e sidecar `.impeccable/design.json` concluídos pelo documentador, com tokens extraídos do código e diferenças das propostas iniciais explicitadas.
+- Playwright aceita `PORTO_BASE_URL` para validar o mesmo fluxo no endereço público sem iniciar servidor local. Os dois testes de fluxo passaram em `https://porto-sucata.vercel.app`: seleção errada/correta, SQL real/WASM, entrega pausável, reload, conclusão persistida, pistas e manual. Teste em navegador automatizado com viewport de celular, não em aparelho físico.
+- Metadados não secretos em `deployment-target.json` e procedimento em `docs/deployment.md` preservam a distinção entre upload do build e deploy integrado ao Git. Arquivos de documentação e configuração de teste não mudam o build publicado.

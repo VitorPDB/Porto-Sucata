@@ -1,0 +1,12 @@
+{
+  "projectName": "porto-sucata",
+  "projectId": "prj_KZser93HmHNBbRFfa8veynMQrDYN",
+  "teamId": "team_VneHRHB9ulmmfjjE6Z4ECNxb",
+  "productionUrl": "https://porto-sucata.vercel.app",
+  "deploymentId": "dpl_BMkZ4QzBhtu5tXYKMx2ZQqnP962w",
+  "sourceCommit": "ba062ed",
+  "method": "direct-upload-of-built-dist",
+  "gitIntegration": false,
+  "outputDirectory": "dist",
+  "otherProjectsMustNotChange": ["so na rede", "dados-em-curso"]
+}
