@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen",
+  "created": "2026-10-29",
+  "reference": "art/references/01-elenco-original-camera.png",
+  "assets": [
+    {
+      "file": "cais-oficina.png",
+      "original": "exec-61556f35-1951-4f62-bafa-bda5aecc30e9.png",
+      "transparent": false,
+      "prompt": "Create a production game background plate, portrait 3:4, for the cozy pixel-art 2D mobile game PORTO SUCATA. Attached reference determines art identity ONLY. Draw a NEW playable small dock courtyard, NOT a concept board. Overhead oblique orthographic camera, ground axes horizontal/vertical. NO PEOPLE, NO ROBOTS, NO TEXT, NO UI, NO labels, NO lights glowing. Empty traversable beige stone and wooden deck courtyard must fill central 65% of image, especially middle and bottom-middle. At top left (x15% y25%) small workshop wall with a bench and shelves. At top right (x80% y25%) small closed market stall with muted rust canopy, two unlit hanging lamp sockets. At bottom edge 15% deep desaturated teal harbor water and wooden dock border. Old workshop roof only at top 12%, crates and planters only around extreme edges. Clear broad open walkable rectangular area from x15% to85%, y40% to78%, absolutely no obstacles in this open zone, suitable for compositing independent moving characters. Muted earthy cream, deep petroleum teal, dusty rust, warm brown, LOW saturation, subtle natural afternoon lighting no neon. Crisp visible clustered pixels, strong readable large shapes, modest detail, same beautiful wood/stone/metal texture and cozy atmosphere as reference but simplify clutter for phone. The illustration fills whole image edge to edge. No frame or ground void. No characters baked in, no lamp parts in foreground. Asset intended as background under independent HTML sprites and interaction zones."
+    },
+    {
+      "file": "elenco-sprites.png",
+      "original": "exec-50ecf7f6-0e02-4775-a3e7-ae5cd50a3cac.png",
+      "transparent": true,
+      "prompt": "Create a production transparent PNG sprite sheet with EXACTLY FOUR separate full-body game character sprites in ONE horizontal row, on true transparent background. Attached image is exact original character identity reference. Four characters left-to-right: curly dark-haired brown-skinned young technician wearing deep teal jacket cream trousers with tool backpack; stocky older grey-haired mechanic woman in muted rust apron; slim market merchant in rust cap cream shirt and dark trousers; compact cream/teal robot drone with single warm amber eye and small claw arms. All face downward toward camera with slight top-down game view, full bodies including feet visible. Each sprite centered inside its own quarter of the canvas with ample transparent margin, no overlap. Character sprites simplified crisp chunky pixel art, about 48x64 logical pixel detail for humans, drone smaller, no smooth vector, no anti-alias painted illustration. Reference identity maintained but useful small game-scale sprite silhouettes rather than high-detail portrait. Muted colors, not vibrant. NO text, NO labels, NO borders, NO contact shadows beyond small pixel shadow directly under feet, NO backgrounds, NO extra miniatures or repeated characters. This is cutout game sprite artwork, clean transparency essential."
+    }
+  ]
+}

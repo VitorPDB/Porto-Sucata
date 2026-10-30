@@ -1,24 +1,24 @@
 # Porto Sucata — contexto vivo do projeto
 
-Última consolidação: **29 de outubro de 2026 — America/Sao_Paulo**.
+Última consolidação: **30 de outubro de 2026 — America/Sao_Paulo**.
 
 Este arquivo é a memória principal do projeto. Seu objetivo é preservar intenção, visual, hierarquia, jogabilidade e estado real mesmo quando a conversa original não estiver disponível. Deve ser atualizado em cada conjunto de modificações, conforme `AGENTS.md`.
 
 ## 1. Estado real e escopo desta versão
 
 - Repositório escolhido pelo usuário: `VitorPDB/Porto-Sucata`, inicialmente vazio, público, branch padrão `main`.
-- Esta versão organiza documentação e quatro pranchas conceituais. Não contém motor de jogo, aplicativo, personagens animados, editor SQL funcional, persistência ou mapas navegáveis.
-- Nenhum framework, engine, banco embarcado ou formato de save foi escolhido para Porto Sucata.
-- As imagens são arte conceitual. Os sprites, tiles, colisões, animações, componentes e estados interativos ainda precisam ser produzidos.
+- Esta versão inclui a primeira missão jogável OF-02, Uma luz para a feira: exploração de um pátio, diálogos, inspeção de peças, edição/execução SQL, seleção visual, entrega do drone, iluminação e salvamento local.
+- Tecnologia inicial: JavaScript em módulos, DOM/CSS para mundo e UI, Vite para desenvolvimento/build e sql.js (SQLite/WASM) em Web Worker. Sem backend, conta ou engine de física.
+- As quatro pranchas continuam sendo referências conceituais. Dois assets novos em `public/art` são utilizados pelo jogo: cenário sem personagens e folha transparente com quatro poses. Os personagens se deslocam como sprites independentes; ainda não têm quadros de caminhada/direções.
 - O usuário pediu preservar detalhadamente o contexto e autorizou organizar o projeto conforme necessário, sem cores muito vibrantes e respeitando a hierarquia definida.
-- A etapa atual é consolidar arte, mundo, personagens e comportamento das telas. Não confundir essa autorização com a aprovação de toda ideia de missão ou tecnologia sugerida.
+- O usuário autorizou implementar as três melhorias discutidas: provar o loop com uma missão completa, conectar código ao efeito no mundo e simplificar a apresentação no celular. Os demais cenários e missões permanecem propostas.
 
 ### Classificação das decisões
 
 - **Aprovado explicitamente:** personagens originais e estilo da primeira prancha; usuário respondeu que estava ótimo e muito bonito. Expansão com seis moradores e seis cenários recebeu "curti vei".
 - **Direção apresentada, a preservar até revisão:** câmera, orientação vertical, loop, painéis de gameplay, progressão por ferramentas, elenco com papéis narrativos. O usuário solicitou continuar a expansão, mas não revisou individualmente todos os detalhes.
 - **Proposta editorial nesta consolidação:** nomes de missões, cadeia narrativa, critérios de sucesso e valores hexadecimais operacionais. Não são decisões finais nem funcionalidades implementadas.
-- **Implementado:** somente a base documental e o inventário de referências desta versão.
+- **Implementado:** base documental, referências e primeiro recorte jogável descrito nesta versão. Não anunciar como campanha completa.
 
 ## 2. Origem e objetivo
 
@@ -75,7 +75,7 @@ Abrir as imagens antes de modificar o visual:
 - Direção proposta: vista de cima inclinada, mostrando chão, frente dos equipamentos e rostos; projeção de jogo ortográfica, sem rotação.
 - Grade e circulação simples; não assumir mapa isométrico em losangos apenas porque a arte conceitual tem diagonais.
 - Orientação vertical prioritária. Não exigir rotação do celular para ler ou escrever código.
-- Câmera acompanha suavemente em áreas pequenas e aproxima interações quando útil.
+- No primeiro pátio, câmera fixa sem rotação; o personagem se desloca dentro da área livre. Acompanhar e aproximar a câmera permanece direção para mapas maiores, não recurso já implementado.
 - Toque para mover/interagir é a direção inicial; controles finais dependem de teste. Não introduzir joystick, plataforma ou precisão de reflexos sem necessidade.
 - Ao abrir terminal, pausar o mundo; ao executar, mostrar a consequência de forma pausável.
 - Nenhuma ação essencial deve depender apenas de som, hover ou cor.
@@ -127,7 +127,7 @@ Sessões-alvo de aproximadamente 3–7 minutos, sem obrigação de concluir ness
 - Nenhuma punição por ausência, energia limitada, streak obrigatório, ranking ou multiplayer.
 - Eventos avançam por progresso, não por calendário real ou horário do telefone.
 - Minijogos complementam o aprendizado; arcade obrigatório não deve bloquear conteúdo.
-- Mundo, rascunho e estado da missão precisam ser retomáveis quando isso for implementado. Ainda não há save no repositório.
+- Mundo, rascunho, inspeções, marco de entrega e conclusão são salvos em localStorage (`porto-sucata:save:v1`). Salvos inválidos/versão desconhecida voltam ao estado inicial. Não há sincronização, backup ou offline garantido. Bloqueio de armazenamento é informado sem impedir a sessão.
 
 ## 7. Progressão e comandos
 
@@ -188,7 +188,7 @@ As pranchas mostram estudos de ambiente, não mapas finais. Planejar circulaçã
 
 ## 10. Catálogo inicial de missões — propostas, não implementadas
 
-Estas missões são exercícios narrativos autorais para discussão. A ordem pedagógica e os comandos devem ser confrontados com o material original antes da implementação. Uma missão visualmente interessante não justifica ensinar semântica errada.
+Estas missões são exercícios narrativos autorais. OF-02 é o único recorte implementado; os demais permanecem para discussão. A ordem pedagógica e os comandos devem ser confrontados com o material original antes de ampliar a campanha. Uma missão visualmente interessante não justifica ensinar semântica errada.
 
 | ID | Missão / personagem | Ação e conteúdo | Consequência proposta |
 |---|---|---|---|
@@ -219,18 +219,18 @@ Validar o resultado sem depender só de igualdade textual do código. Verificar 
 
 ### OF-02 como referência de coerência
 
-Schema proposto: pecas(id, nome, tipo, estado). Dados: Lâmpada A funcionando; Lâmpada B quebrada; Lâmpada C funcionando, todas com tipo lampada. Acrescentar outra categoria em testes futuros para verificar o filtro de tipo.
+Schema implementado: pecas(id INTEGER PRIMARY KEY, nome TEXT, tipo TEXT, estado TEXT). Dados: ID 1 Lâmpada A funcionando; ID 2 Lâmpada B quebrada; ID 3 Lâmpada C funcionando, todas com tipo lampada; ID 4 Rádio de bolso, tipo radio, funcionando. O rádio força a distinção entre filtrar tipo e filtrar estado.
 
 ```sql
-SELECT nome
+SELECT id, nome
 FROM pecas
 WHERE tipo = 'lampada'
   AND estado = 'funcionando';
 ```
 
-Resultado esperado: Lâmpada A e Lâmpada C, em qualquer ordem se ORDER BY não foi solicitado. O drone recebe os identificadores correspondentes de forma definida pelo controlador; não presumir que nomes são chaves únicas. Produção deverá especificar esse contrato de seleção.
+Resultado esperado: IDs 1 e 3, sem duplicatas, em qualquer ordem. O contrato exige uma coluna chamada id, sem alteração dos valores inteiros; nome é recomendado para leitura, não obrigatório para validar. O controlador nunca usa nomes como chaves. Consultas equivalentes são aceitas pela comparação de IDs, não por texto exato. A seleção é validada neste dataset, sem alegar comprovação de domínio ou generalização para todos os datasets.
 
-Na prancha, a tabela nome/estado é uma prévia de entrada, não o resultado exato da consulta (que seleciona apenas nome). O brilho e as duas lâmpadas na imagem são narrativa visual, não evidência de uma execução real.
+Na prancha antiga, a tabela nome/estado era prévia de entrada e a consulta selecionava apenas nome; o código jogável adiciona id pelo contrato do controlador. A implementação distingue Dados de entrada e Resultado da consulta. A saída exibida vem do SQLite real. O brilho na referência é conceitual; no jogo, as luzes são camadas acionadas após concluir a entrega.
 
 ## 11. Minijogos e eventos secundários
 
@@ -289,16 +289,16 @@ Esse dataset não é o inventário ficcional de peças. Não trocar seus dados s
 - Ele continha três lições introdutórias, biblioteca de textos, oito questões de múltipla escolha, progresso local e seleção ativa. Não era o curso completo e não executava SQL real.
 - Não copiar essas limitações como requisitos do novo jogo nem anunciar que Porto Sucata já está publicado naquela URL.
 - O projeto Vercel "so na rede" pertence ao usuário e não pode ser alterado. O nome de equipe semelhante não deve ser confundido com autorização para modificar esse projeto.
-- Nenhum alvo de deploy está configurado para este repositório. Não migrar domínio nem vincular projeto automaticamente nesta etapa documental.
+- A publicação deste primeiro recorte deve usar um projeto Vercel separado chamado porto-sucata. A configuração efetiva e o endereço verificado serão registrados quando a publicação terminar. Não alterar os dois projetos anteriores.
 
 ## 14. Decisões em aberto
 
-- Engine/renderização, tecnologia de UI e estratégia de distribuição.
-- Executor SQL e suporte real a dialetos; simulações versus serviços para etapas distribuídas.
+- Engine para mapas maiores, animação direcional e eventual evolução além do DOM/CSS inicial.
+- Suporte futuro a MySQL/Oracle; esta bancada usa SQLite explicitamente identificado. Simulações versus serviços para etapas distribuídas continuam em aberto.
 - Resolução base, tamanho de tiles, sprites finais, animações e projeção exata dos mapas.
-- Fonte e tamanhos finais; tokens propostos precisam de validação de contraste.
+- Fontes iniciais: Fraunces 600 em títulos; DM Sans 400/500/600 na interface; Consolas/monospace no código. Fontes servidas localmente pelo build. Novos tokens/tamanhos devem preservar legibilidade.
 - Personalização e nome do protagonista; nomes da mecânica, feirante e drone.
-- Salvamento, versionamento/migração de save, backup e funcionamento offline.
+- Migração futura de saves, backup, sincronização e funcionamento offline. O save v1 local já existe.
 - Detalhes de deslocamento por toque, editor com teclado e acessibilidade.
 - Validação pedagógica de cada missão contra as fontes e ajuste da ordem de aprendizagem.
 - Áudio e música originais; nenhuma faixa foi produzida/licenciada nesta etapa.
@@ -324,3 +324,26 @@ Esse dataset não é o inventário ficcional de peças. Não trocar seus dados s
 - Complementos propostos: catálogo de 18 missões, relações do elenco e tokens preliminares de UI; identificados como propostas.
 - Verificação realizada: todos os links relativos dos Markdown apontam para arquivos existentes; as quatro imagens copiadas têm SHA-256 idêntico aos originais; dimensões, tamanho e hashes foram registrados em `art/references/manifest.json`. Documentação revisada quanto à separação entre conceitos e implementação. Não há testes de gameplay aplicáveis nesta etapa documental.
 - Limitações: sem jogo implementado, sem deploy e sem sprites prontos. Conector GitHub recusou escrita por permissão da integração; o Git local foi usado para preparar o repositório. O histórico Git remoto é a referência para confirmar a publicação desta revisão.
+
+### 2026-10-29 — Primeira missão jogável
+
+- Pedido: implementar a atualização proposta e corrigir os três pontos fracos: diversão ainda não comprovada, editor desconectado do mundo e excesso de detalhe no celular.
+- Arquivos: `src/`, `index.html`, `package.json`/lockfile, `tests/`, `playwright.config.js`, `public/art/`, PRODUCT e contrato de direção em `docs/gameplay-direction.md`; README e este contexto atualizados.
+- Arte: cenário novo com área central livre e folha de sprites transparente, gerados pela ferramenta integrada com a prancha original como referência. Prompts integrais em `public/art/provenance.json`. Originais aprovados preservados.
+- Loop implementado: conversar/inspecionar → escrever/testar → visualizar IDs selecionados → corrigir se necessário → enviar drone → acender barraca → explorar/consultar manual novamente.
+- SQL: banco SQLite efêmero somente leitura em worker isolado a cada execução, limite de 100 linhas, 6.000 caracteres e timeout de 6 s com término do worker. Sem chamadas de rede para executar a consulta. O WASM é servido pelo próprio site.
+- Missão: sem pré-requisito neste recorte; dicas em três camadas, solução comentada, filtro errado explica peça quebrada/rádio, consultas equivalentes aceitas e duplicatas rejeitadas. COUNT de linhas sozinho não comprova sucesso. Não há nota de domínio.
+- Interações: toque no chão/setas no pátio; hotspots e peças acessíveis pelo teclado; abas com aria-selected e navegação por setas; pausa/manual/diário em diálogo modal; execução do drone pausa com modal ou aba do navegador oculta.
+- Mobile: mapa é recortado na borda inferior sem deformar a imagem; no terminal fica recolhido por padrão, com botão para ver cais/seleção. Editor de 16px e controles de toque evitam espremer o código. Desktop mantém mundo e bancada lado a lado.
+- Save: localStorage versionado guarda código, posição, inspeções, pista, etapa da entrega, conclusão e preferência de movimento. Recarregar uma entrega retoma o início da etapa atual; não preserva o milissegundo da animação. A conclusão não se perde ao experimentar consultas depois.
+- Recompensa: barraca iluminada e descoberta do ORDER BY no manual; o comando não é artificialmente proibido antes da conclusão. Só uma missão disponível.
+- Verificação: 4 testes de lógica/SQLite/save e 3 testes Playwright passaram; cobertura de filtros, erro de sintaxe, ajuda, tabs, pausa, reload, persistência da conclusão e ausência de overflow em 320/360px. Build de produção passou. Capturas em 1440, 390 e 360px; revisor independente emitiu `ship` no escopo das correções solicitadas: seleção do feirante, atores sem encobrir peças, conclusão mantendo a iluminação visível e memória atualizada. O detector automático da skill não executou por indisponibilidade do carregador; revisão direta de imagens/código foi realizada. Não houve teste com teclado virtual de aparelho físico.
+- Limitações assumidas: poses estáticas com deslocamento, sem animação de caminhada direcional; sem áudio, mapa amplo, inventário consumível, backend, campanha completa, sincronização e offline garantido. Ainda não houve playtest com o usuário: diversão é hipótese para validar jogando.
+
+### 2026-10-30 — Revisão final e preparação de publicação
+
+- Correções de revisão: seleção explícita do feirante, peças acima dos atores na composição, ator/drone reposicionados, enquadramento móvel 12:13 recortando a imagem sem deformação, fim da entrega sem rolagem automática e botão Ver conquista.
+- DESIGN.md e `.impeccable/design.json` registram o sistema efetivamente implementado. As capturas de teste são locais e reproduzíveis, ignoradas pelo Git.
+- Criado projeto Vercel separado `porto-sucata`, ID `prj_KZser93HmHNBbRFfa8veynMQrDYN`, equipe `team_VneHRHB9ulmmfjjE6Z4ECNxb`. Os projetos antigos não foram modificados.
+- A tentativa de conectar o repositório foi recusada pela Vercel porque falta instalar a integração GitHub naquela conta. Isso é diferente de ausência de commits no GitHub. O projeto foi criado sem integração Git; publicação será por upload do build estático testado. Sem deploy automático a cada push até conectar a integração.
+- Commit/push desta implementação e upload do build são etapas distintas; confirmar ambos antes de anunciar a versão disponível.

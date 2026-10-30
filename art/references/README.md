@@ -28,6 +28,6 @@ Os briefs acima são resumos editoriais, não transcrições integrais dos promp
 - Na implementação, reduzir densidade e adaptar enquadramento sem perder materiais, silhuetas e atmosfera.
 - Não usar a prancha inteira como substituto de cenário navegável ou de sistema de personagens.
 - Não tratar texto gerado na imagem como fonte de verdade para sintaxe/resultado SQL.
-- Ainda não há animações, transparências de sprites, atlas, tileset ou áudio associado a essas referências.
+- A primeira missão agora usa um cenário e uma folha transparente de poses produzidos separadamente em `public/art/`, com prompts em `public/art/provenance.json`. As pranchas desta pasta continuam sendo referência, não os assets recortados do jogo. Não há frames de caminhada direcional, tileset ou áudio.
 
 `manifest.json` registra dimensões, tamanho e SHA-256 das cópias versionadas para conferir integridade.

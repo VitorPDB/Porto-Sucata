@@ -11,3 +11,6 @@ coverage/
 Thumbs.db
 __pycache__/
 .venv/
+test-results/
+playwright-report/
+.impeccable/review/
