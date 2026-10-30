@@ -1,0 +1,34 @@
+[
+  {
+    "file": "01-elenco-original-camera.png",
+    "original": "exec-fcd6ad2c-2906-4b3b-a32e-6df35d1d0a42.png",
+    "bytes": 2119591,
+    "width": 1672,
+    "height": 941,
+    "sha256": "fb515a78d37e9a416ecb92d469cbd04a347f79cb9c1e855e95a984bb7be2684e"
+  },
+  {
+    "file": "02-gameplay-paineis.png",
+    "original": "exec-a43e613a-18ee-48d8-b824-2de055c1934f.png",
+    "bytes": 2375497,
+    "width": 1672,
+    "height": 941,
+    "sha256": "09e6963f3cdcfa30a4cb8913700f86b958eb6066b694a357d85054abef85dfe0"
+  },
+  {
+    "file": "03-moradores-do-porto.png",
+    "original": "exec-ec0032e8-c846-494e-a92d-fd0abe2a7660.png",
+    "bytes": 1902786,
+    "width": 1536,
+    "height": 1024,
+    "sha256": "198da2b4502f5d3e099f9f0778aecec1930bd4c05c78aff6dba506e04ec1313b"
+  },
+  {
+    "file": "04-cenarios-do-porto.png",
+    "original": "exec-f2d05ae1-cc8f-4380-9a33-ad395402d56b.png",
+    "bytes": 3512406,
+    "width": 1536,
+    "height": 1024,
+    "sha256": "3b2c42b0bbf318ba51288e8c0fd010959addf0f6534bf9d71542a259eb2b041c"
+  }
+]
