@@ -2,11 +2,11 @@
 
 Uma aventura single player em pixel art 2D, pensada para celular: explorar um porto, conhecer seus moradores e usar código para recuperar máquinas, resolver mistérios e transformar os lugares.
 
-**Estado atual: primeira missão jogável — Uma luz para a feira.** Explore o cais, inspecione peças, consulte o catálogo com SQL real e veja o drone iluminar a barraca.
+**Estado atual: primeira missão jogável — Uma luz para a feira.** Receba o pedido, explore o depósito, filtre peças com SQL real, opere o scanner e volte com a carga para iluminar a feira.
 
 **[Jogar Porto Sucata](https://porto-sucata.vercel.app)**
 
-Publicação atual por upload do build testado. A integração GitHub da Vercel ainda não está instalada nesta conta, portanto um push neste repositório não dispara deploy automaticamente.
+Projeto Vercel exclusivo Porto Sucata, configurado para compilar o repositório com Vite. Histórico e alvo de publicação em deployment-target.json e docs/deployment.md.
 
 ## Executar localmente
 
@@ -30,13 +30,13 @@ Para verificar um deploy existente, defina `PORTO_BASE_URL` com o endereço dele
 
 ## O que está funcionando
 
-- Pátio com personagem independente, movimento por toque/setas e conversas.
-- Catálogo com quatro peças inspecionáveis, editor e dicas graduais.
+- Pedido diário, cais e depósito com exploração por pontos de interesse.
+- Catálogo com quatro peças, editor e dicas graduais.
 - SQLite real no navegador, isolado em worker; consultas equivalentes aceitas por resultado.
-- Seleção visual, feedback de erros e entrega pausável do drone.
+- Scanner em duas etapas de timing, opção sem tempo, carga e retorno obrigatório à oficina.
 - Barraca iluminada, diário, manual e salvamento local do progresso/rascunho.
 
-Esta versão tem uma missão. Os outros cenários continuam conceituais. Os sprites ainda usam uma pose por personagem; não há animação direcional, áudio, conta, sincronização nem modo offline garantido. O dialeto executado é SQLite, não uma implementação completa de MySQL/Oracle.
+Esta versão tem uma missão. Cais e depósito estão implementados; demais cenários continuam conceituais. Os sprites ainda usam uma pose por personagem; não há animação direcional, áudio, conta, sincronização nem modo offline garantido. O dialeto executado é SQLite, não uma implementação completa de MySQL/Oracle.
 
 ## Comece aqui
 

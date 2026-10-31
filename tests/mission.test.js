@@ -30,7 +30,7 @@ test('statement boundaries, errors and read-only behavior preserve catalog', () 
 test('saves preserve draft and delivery progress, corrupt or future saves are safe', () => {
   const values = new Map();
   const storage = { getItem: key => values.get(key), setItem: (key, value) => values.set(key, value) };
-  const state = { ...initialState(), stage: 'delivery', deliveryStep: 1, code: SOLUTION_SQL, inspected: [1, 3] };
+  const state = { ...initialState(), stage: 'delivery', deliveryStep: 1, code: SOLUTION_SQL, inspected: [1, 3], inventory: [1, 3] };
   assert.equal(writeSave(storage, state), true);
   assert.deepEqual(loadSave(storage), state);
   values.set(SAVE_KEY, '{invalid');

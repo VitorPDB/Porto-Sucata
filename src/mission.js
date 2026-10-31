@@ -34,28 +34,49 @@ export function assessResult(result) {
   return { ok, ids, message };
 }
 
-export const SAVE_KEY = 'porto-sucata:save:v1';
+export const SAVE_KEY = 'porto-sucata:save:v2';
 export function initialState() {
-  return { version: 1, stage: 'intro', code: STARTER_SQL, hint: 0, position: { x: 50, y: 76 }, deliveryStep: 0, completed: false, inspected: [], reducedMotion: false };
+  return { version: 2, stage: 'briefing', location: 'cais', code: STARTER_SQL, hint: 0, position: { x: 50, y: 76 }, deliveryStep: 0, completed: false, inspected: [], reducedMotion: false, accepted: false, discovered: false, clue: false, inventory: [], scanRound: 0, scanPhase: 0, scanResult: null, assisted: false };
 }
 export function normalizeSave(raw) {
   const base = initialState();
-  if (!raw || raw.version !== 1) return base;
-  const stages = ['intro', 'explore', 'bench', 'delivery', 'complete'];
-  return {
+  if (!raw || ![1, 2].includes(raw.version)) return base;
+  const stages = ['briefing', 'map', 'explore', 'bench', 'scan', 'findings', 'cargo', 'return', 'delivery', 'complete'];
+  const legacy = raw.version === 1;
+  const numericIds = value => Array.isArray(value) ? [...new Set(value.filter(id => PARTS.some(p => p.id === id)))] : [];
+  const scanResult = raw.scanResult && Array.isArray(raw.scanResult.columns) && Array.isArray(raw.scanResult.values)
+    ? { columns: raw.scanResult.columns.slice(0, 20).map(String), values: raw.scanResult.values.slice(0, 100).filter(Array.isArray).map(row => row.slice(0, 20).map(v => typeof v === 'number' || v === null ? v : String(v).slice(0, 300))) } : null;
+  const normalized = {
     ...base,
-    stage: stages.includes(raw.stage) ? raw.stage : 'intro',
+    stage: legacy ? (raw.completed ? 'complete' : 'briefing') : stages.includes(raw.stage) ? raw.stage : 'briefing',
+    location: !legacy && raw.location === 'deposito' ? 'deposito' : 'cais',
     code: typeof raw.code === 'string' ? raw.code.slice(0, 6000) : base.code,
-    hint: Math.min(3, Math.max(0, Number(raw.hint) || 0)),
+    hint: Math.floor(Math.min(3, Math.max(0, Number(raw.hint) || 0))),
     position: { x: Math.max(18, Math.min(82, Number(raw.position?.x) || 50)), y: Math.max(43, Math.min(76, Number(raw.position?.y) || 70)) },
-    deliveryStep: Math.min(2, Math.max(0, Math.floor(Number(raw.deliveryStep) || 0))),
+    deliveryStep: legacy ? 0 : Math.min(2, Math.max(0, Math.floor(Number(raw.deliveryStep) || 0))),
     completed: raw.completed === true,
-    inspected: Array.isArray(raw.inspected) ? raw.inspected.filter(id => PARTS.some(p => p.id === id)) : [],
+    inspected: numericIds(raw.inspected),
     reducedMotion: raw.reducedMotion === true,
+    accepted: !legacy && raw.accepted === true,
+    discovered: !legacy && raw.discovered === true,
+    clue: !legacy && raw.clue === true,
+    inventory: legacy ? [] : numericIds(raw.inventory),
+    scanRound: Math.floor(Math.max(0, Math.min(2, Number(raw.scanRound) || 0))),
+    scanPhase: Number.isFinite(raw.scanPhase) ? Math.max(0, Math.min(2, raw.scanPhase)) : 0,
+    scanResult: legacy ? null : scanResult,
+    assisted: raw.assisted === true,
   };
+  if (['scan', 'findings'].includes(normalized.stage) && !normalized.scanResult) normalized.stage = normalized.discovered ? 'bench' : 'explore';
+  if (normalized.stage === 'scan' && normalized.scanRound === 2) normalized.stage = 'findings';
+  if (normalized.stage === 'findings' && normalized.scanRound < 2) normalized.stage = 'scan';
+  if (normalized.stage === 'delivery' && !assessResult({ columns: ['id'], values: normalized.inventory.map(id => [id]) }).ok) normalized.stage = 'return';
+  return normalized;
 }
 export function loadSave(storage) {
-  try { return normalizeSave(JSON.parse(storage.getItem(SAVE_KEY))); } catch { return initialState(); }
+  try {
+    const saved = storage.getItem(SAVE_KEY);
+    return normalizeSave(JSON.parse(saved ?? storage.getItem('porto-sucata:save:v1')));
+  } catch { return initialState(); }
 }
 export function writeSave(storage, state) {
   try { storage.setItem(SAVE_KEY, JSON.stringify(state)); return true; } catch { return false; }

@@ -1,0 +1,15 @@
+.hotspot.records { left: 5%; top: 36%; }
+.hotspot.salvage { left: auto; right: 5%; top: 47%; }
+.hotspot.records, .hotspot.salvage { min-height: 44px; max-width: 65%; padding: 8px 10px; border: 2px solid #87563e; border-radius: 4px; background: #f3ebdd; color: #263c3a; font-size: 12px; font-weight: 600; }
+.hotspot span { display: flex; align-items: center; gap: 5px; }
+.hotspot.selected { background: #294b48; color: #f3ebdd; border-color: #d0bb91; }
+.hotspot:disabled { opacity: .75; }
+.destination-art { width: 100%; height: 200px; object-fit: cover; object-position: center 35%; border-radius: 4px; image-rendering: pixelated; }
+.scan-console { padding: 20px; background: #294b48; color: #f3ebdd; margin: 22px 0; border-radius: 4px; }
+.scan-console > span { font-size: 12px; letter-spacing: .08em; }
+.scan-console p { color: #f3ebdd; margin-bottom: 0; }
+#scan-meter { height: 76px; position: relative; margin: 20px 6px; border-bottom: 2px solid #c8c0b0; background: #203b39; }
+.scan-target { position: absolute; height: 100%; background: #87563e; border: 3px solid #d0bb91; }
+.scan-cursor { position: absolute; height: 100%; width: 4px; background: #faf6ec; transform: translateX(-50%); }
+.scan-cursor::before { content: ''; position: absolute; width: 12px; height: 12px; background: #faf6ec; left: -4px; top: -6px; }
+.interaction-panel > .button { margin-top: 12px; }

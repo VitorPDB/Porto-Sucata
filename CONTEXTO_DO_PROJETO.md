@@ -1,15 +1,15 @@
 # Porto Sucata — contexto vivo do projeto
 
-Última consolidação: **30 de outubro de 2026 — America/Sao_Paulo**.
+Última consolidação: **31 de outubro de 2026 — America/Sao_Paulo**.
 
 Este arquivo é a memória principal do projeto. Seu objetivo é preservar intenção, visual, hierarquia, jogabilidade e estado real mesmo quando a conversa original não estiver disponível. Deve ser atualizado em cada conjunto de modificações, conforme `AGENTS.md`.
 
 ## 1. Estado real e escopo desta versão
 
 - Repositório escolhido pelo usuário: `VitorPDB/Porto-Sucata`, inicialmente vazio, público, branch padrão `main`.
-- Esta versão inclui a primeira missão jogável OF-02, Uma luz para a feira: exploração de um pátio, diálogos, inspeção de peças, edição/execução SQL, seleção visual, entrega do drone, iluminação e salvamento local.
+- Esta versão inclui a primeira missão jogável OF-02, Uma luz para a feira: pedido no cais, exploração do depósito por pontos de interesse, pista opcional, descoberta do lote, SQL real, scanner com duas etapas de timing, recuperação de carga e retorno obrigatório à oficina para instalar e iluminar a feira.
 - Tecnologia inicial: JavaScript em módulos, DOM/CSS para mundo e UI, Vite para desenvolvimento/build e sql.js (SQLite/WASM) em Web Worker. Sem backend, conta ou engine de física.
-- As quatro pranchas continuam sendo referências conceituais. Dois assets novos em `public/art` são utilizados pelo jogo: cenário sem personagens e folha transparente com quatro poses. Os personagens se deslocam como sprites independentes; ainda não têm quadros de caminhada/direções.
+- As quatro pranchas continuam sendo referências conceituais. Três assets em `public/art` são utilizados: cais-oficina.png, deposito-luminarias.png e elenco-sprites.png. Personagens são sprites independentes em posições contextuais; não há caminhada livre ou quadros direcionais. O depósito novo foi gerado para esta extensão, ainda sem aprovação individual do usuário.
 - O usuário pediu preservar detalhadamente o contexto e autorizou organizar o projeto conforme necessário, sem cores muito vibrantes e respeitando a hierarquia definida.
 - O usuário autorizou implementar as três melhorias discutidas: provar o loop com uma missão completa, conectar código ao efeito no mundo e simplificar a apresentação no celular. Os demais cenários e missões permanecem propostas.
 
@@ -75,8 +75,8 @@ Abrir as imagens antes de modificar o visual:
 - Direção proposta: vista de cima inclinada, mostrando chão, frente dos equipamentos e rostos; projeção de jogo ortográfica, sem rotação.
 - Grade e circulação simples; não assumir mapa isométrico em losangos apenas porque a arte conceitual tem diagonais.
 - Orientação vertical prioritária. Não exigir rotação do celular para ler ou escrever código.
-- No primeiro pátio, câmera fixa sem rotação; o personagem se desloca dentro da área livre. Acompanhar e aproximar a câmera permanece direção para mapas maiores, não recurso já implementado.
-- Toque para mover/interagir é a direção inicial; controles finais dependem de teste. Não introduzir joystick, plataforma ou precisão de reflexos sem necessidade.
+- Câmera fixa sem rotação em duas cenas: cais e depósito. Toques em pontos de interesse reposicionam o personagem contextualmente; não há movimentação livre.
+- Decisão revogada: toque no chão/setas para caminhar. Substituída por exploração com pontos de interesse nomeados, a pedido do usuário. Timing opcional opera o scanner, com modo sem tempo e mesma recompensa.
 - Ao abrir terminal, pausar o mundo; ao executar, mostrar a consequência de forma pausável.
 - Nenhuma ação essencial deve depender apenas de som, hover ou cor.
 
@@ -99,7 +99,7 @@ Ordem: **pedido → solução/código → dados necessários → executar → aj
 - Terminal com superfície opaca creme, borda petróleo e controles amplos.
 - Abas Pedido, Código e Dados; aba atual com preenchimento e estado textual/semântico visível.
 - Mundo pausado indicado. Contexto visual pequeno pode permanecer, mas nunca comprimir o editor.
-- Editor legível, comandos sugeridos por toque, teclado opcional, desfazer e preservação do rascunho.
+- Editor legível com rascunho preservado e solução gradual. Chips de inserção/desfazer eram parte da bancada v1; a interface desta expedição usa edição direta e solução preenchível. Reintroduzir atalhos de toque é melhoria futura, não controle disponível agora.
 - Chips de comando ajudam a escrever; não substituir indefinidamente compreensão por escolha entre respostas óbvias.
 - Uma ação primária "Executar"; "Pedir dica" secundária.
 - Prévia de dados deve ser identificada como dados de entrada; não confundir com resultado da consulta.
@@ -111,14 +111,16 @@ Ordem: **efeito no mundo → resultado/explicação → recompensa → próximo 
 
 - Consulta gera dados; controlador converte esses dados em ação do drone. Não ensinar que SQL movimenta personagens diretamente.
 - Sucesso mostra a mudança (ex.: feira iluminada), explica por que o resultado atende ao pedido e apresenta eventual ferramenta liberada.
-- Ações: Ver consulta e Continuar.
+- Ações atuais: recolher resultado, ajustar consulta, retornar, instalar, consultar Manual e repetir expedição.
 - Tentativa incorreta mostra seleção obtida versus necessidade, dica localizada e "Ajustar consulta".
 - Não apagar o código digitado nem punir com perda permanente de recursos.
 - Os títulos gigantes "EXPLORAR / PROGRAMAR / VER FUNCIONAR" são rótulos da prancha, NÃO cabeçalhos que devem ocupar a tela do jogo.
 
 ## 6. Loop e ritmo
 
-**Descobrir → entender um pedido → preparar código → executar → observar → corrigir → transformar o porto → descobrir outra possibilidade.**
+**Receber pedido → escolher destino → investigar região → descobrir lote → preparar SQL → operar scanner → recolher carga → voltar à oficina → conferir e instalar → encerrar o dia.**
+
+O dia é narrativo, não um relógio. Apenas o primeiro dia/uma missão está disponível. Scanner tem duas janelas distintas (28–58% / 61–83%), movimento de ida e volta e etapas de 2,4/1,8 segundos por percurso. Erro mantém etapas anteriores. Pausa ou troca de aba interrompe o movimento e exige reinício explícito. Modo sem tempo nas opções e preferência de movimento reduzido permitem confirmar cada sinal, com resultado e recompensa idênticos. O resultado SQLite fica congelado antes do minigame: timing nunca corrige filtros. Carga incorreta pode ser recolhida e levada, mas não encerra a missão; voltar e ajustar não remove conquista.
 
 Sessões-alvo de aproximadamente 3–7 minutos, sem obrigação de concluir nesse tempo. Uma missão longa pode ter pequenas etapas com salvamento. Interrupções no transporte não devem causar falha.
 
@@ -127,7 +129,7 @@ Sessões-alvo de aproximadamente 3–7 minutos, sem obrigação de concluir ness
 - Nenhuma punição por ausência, energia limitada, streak obrigatório, ranking ou multiplayer.
 - Eventos avançam por progresso, não por calendário real ou horário do telefone.
 - Minijogos complementam o aprendizado; arcade obrigatório não deve bloquear conteúdo.
-- Mundo, rascunho, inspeções, marco de entrega e conclusão são salvos em localStorage (`porto-sucata:save:v1`). Salvos inválidos/versão desconhecida voltam ao estado inicial. Não há sincronização, backup ou offline garantido. Bloqueio de armazenamento é informado sem impedir a sessão.
+- Pedido, região, descoberta, pista, rascunho, carga, etapa/fase do scanner, resultado consultado, instalação e conclusão são salvos em localStorage (`porto-sucata:save:v2`). Saves v1 preservam rascunho e conquista: concluídos abrem a conclusão com Repetir expedição, demais recomeçam pelo pedido. A migração não apaga a chave antiga. Salvos inválidos/versão desconhecida voltam ao estado inicial. Não há sincronização, backup ou offline garantido. Bloqueio de armazenamento é informado sem impedir a sessão.
 
 ## 7. Progressão e comandos
 
@@ -298,8 +300,8 @@ Esse dataset não é o inventário ficcional de peças. Não trocar seus dados s
 - Resolução base, tamanho de tiles, sprites finais, animações e projeção exata dos mapas.
 - Fontes iniciais: Fraunces 600 em títulos; DM Sans 400/500/600 na interface; Consolas/monospace no código. Fontes servidas localmente pelo build. Novos tokens/tamanhos devem preservar legibilidade.
 - Personalização e nome do protagonista; nomes da mecânica, feirante e drone.
-- Migração futura de saves, backup, sincronização e funcionamento offline. O save v1 local já existe.
-- Detalhes de deslocamento por toque, editor com teclado e acessibilidade.
+- Backup, sincronização e funcionamento offline continuam pendentes. Migração v1 para v2 implementada.
+- Expandir variedade de exploração e testar editor/acessibilidade em aparelho físico.
 - Validação pedagógica de cada missão contra as fontes e ajuste da ordem de aprendizagem.
 - Áudio e música originais; nenhuma faixa foi produzida/licenciada nesta etapa.
 
@@ -350,3 +352,18 @@ Esse dataset não é o inventário ficcional de peças. Não trocar seus dados s
 - Confirmado: commit da implementação `ba062ed` enviado a `origin/main`; Vercel respondeu READY com alias `porto-sucata.vercel.app`. DESIGN.md e sidecar `.impeccable/design.json` concluídos pelo documentador, com tokens extraídos do código e diferenças das propostas iniciais explicitadas.
 - Playwright aceita `PORTO_BASE_URL` para validar o mesmo fluxo no endereço público sem iniciar servidor local. Os dois testes de fluxo passaram em `https://porto-sucata.vercel.app`: seleção errada/correta, SQL real/WASM, entrega pausável, reload, conclusão persistida, pistas e manual. Teste em navegador automatizado com viewport de celular, não em aparelho físico.
 - Metadados não secretos em `deployment-target.json` e procedimento em `docs/deployment.md` preservam a distinção entre upload do build e deploy integrado ao Git. Arquivos de documentação e configuração de teste não mudam o build publicado.
+
+
+### 2026-10-31 — Expedição por cenas e scanner
+
+- Autorização: usuário pediu aplicar, subir e fazer deploy antes de continuar expandindo.
+- Arquivos: src/main.js refeito para o loop diário; src/expedition.js concentra transições e timing; mission.js guarda save v2 e migração; expedition.css estiliza scanner/hotspots; testes adaptados ao novo fluxo.
+- Pedido substitui diálogos livres; descoberta do lote libera bancada. Pista nos registros é opcional. Banco continua com as quatro peças e solução WHERE tipo/estado original; fonte autoral e escopo SQLite preservados. Carga validada pelos IDs 1 e 3, ordem irrelevante. Dicas e solução disponíveis.
+- Minigame opera o scanner, não seleciona linhas de código por reflexo: escolha pedagógica para preservar compreensão. Dois acertos revelam o resultado real, inclusive filtros errados. Sem dano, energia, perda de peças ou ritmo obrigatório.
+- Deslocamento antigo removido; personagens ficam em poses contextuais, sem animação direcional. Instalação usa etapas visuais e iluminação final, sem a antiga trajetória animada de coleta.
+- Nova arte: public/art/deposito-luminarias.png, gerada com cais-oficina.png como referência. Pranchas e assets anteriores preservados. Procedência e prompt em public/art/provenance.json. Paleta contida e hierarquia preservadas; hotspot selecionado tem texto/check além de cor.
+- Verificação: 8 testes Node e 3 Playwright locais passaram (SQL real, carga errada/certa, timing real com erro/acerto, pausa, reload da etapa, migração, retorno obrigatório, conclusão, tabs, erro SQL, overflow em 320px). Capturas atuais desktop 1440 e mobile 360; sem teste em aparelho físico. Build local passou.
+- Escopo: um dia, uma missão, dois cenários, um minigame de duas etapas. Sem áudio, campanha, combate, multiplayer, backend ou offline garantido. Diversão ainda depende de playtest do usuário.
+- Publicação: integração Git agora reconhecida pela Vercel (deployment anterior source=git no commit 0ce9cdf). Configuração ajustada no projeto exclusivo Porto Sucata para Vite, npm ci, npm run build e dist. Confirmar commit/deploy/testes públicos antes de anunciar publicação.
+
+- Revisão final desta atualização: revisor independente marcou ship no escopo de duas correções (foco contínuo no scanner pelo teclado e instruções coerentes com cada cena). Capturas refeitas; 3 testes Playwright passaram novamente, incluindo duas rodadas reais pelo teclado e foco no resultado. Nenhum detector automático da skill foi executado. vercel.json versiona a configuração de build exclusiva deste projeto.

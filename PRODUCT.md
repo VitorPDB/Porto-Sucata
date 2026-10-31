@@ -4,11 +4,11 @@ Single player web game, mobile-first, Brazilian Portuguese. The player explores 
 
 ## First playable slice
 
-One complete original mission, OF-02, Uma luz para a feira. Player can move within the courtyard, talk to the mechanic/merchant, inspect four pieces, execute read-only SQLite, inspect the returned selection, send the drone and illuminate the stall. Draft, inspection state, player location, delivery checkpoint and completion persist locally. No account, backend, cross-device sync or guaranteed offline support.
+One complete original mission, OF-02, Uma luz para a feira. Accept the daily request, travel to the salvage depot, investigate records and a crate, configure real read-only SQLite, operate a two-stage scanner, recover the actual query result, return to the workshop and install the correct lamps. No free walking. Draft, discovery, cargo, scanner checkpoint and achievement persist locally; v1 saves migrate. Optional untimed scanner grants identical progress. No account, backend, cross-device sync or guaranteed offline support.
 
 ## Non-negotiables
 
-Preserve the approved pixel-art cast, muted petroleum/cream/rust palette, overhead-oblique camera, large mobile controls and meaningful selection state. Code is legible text, never a tiny pixel font. The world pauses for the terminal. Query results are real; the drone is an independent controller driven by returned IDs. Incorrect results do not destroy progress. No timers, grind, multiplayer or absence penalties.
+Preserve the approved pixel-art cast, muted petroleum/cream/rust palette, overhead-oblique camera, large mobile controls and meaningful selection state. Code is legible text, never a tiny pixel font. The world pauses for the terminal. Query results are real; the drone is an independent controller driven by returned IDs. Incorrect results do not destroy progress. No mandatory timing, grind, multiplayer or absence penalties.
 
 ## Success
 

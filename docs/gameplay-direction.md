@@ -1,11 +1,11 @@
-# First playable — direction contract
+# Expedition — direction contract
 
-- Established visual world: the four approved/reference sheets under `art/references/`; preserve their cast, warm materiality and muted colors. This is a functional extension of that world, not a new identity or literal screenshot reproduction.
-- Surface modes: world = Experience; terminal = Operate; manual = Read.
-- First viewport: a visible harbor courtyard with independently positioned characters, a named interactive workbench and a concrete two-lamp objective. Desktop keeps world and interaction side by side. Phone stacks them and scrolls to the active interaction without squeezing the editor.
-- Signature interaction: SQL selects actual IDs; those pieces are visibly marked, and an independently animated drone collects and delivers them. The lamps light only after the delivery checkpoint completes.
-- Hierarchy: scene/goal/contextual action; then request/code/data/execute; then consequence/explanation/reward.
-- Palette: cream surfaces, dark petroleum text/actions, subdued rust secondary emphasis and small amber light accents. Raster saturation is reduced by CSS, originals remain unchanged.
-- Artwork: new scene with open walking space and transparent separate sprite sheet; never use an approved concept board as a whole-page screenshot or map replacement. The scene is a background plate under interactive actors, selection controls and stateful lights.
-- Honest limitations: static facing sprite poses translated through the scene (no directional walking-frame animation yet), one bounded courtyard, simple interaction controller, local save only, no audio, no cross-device sync or guaranteed offline.
-- Verification target: desktop 1440px, phones 390px/360px, overflow check 320px, correct/incorrect SQL, pause/resume, draft persistence, completion persistence, manual keyboard focus and local storage failure.
+- Established world: approved sheets, muted cream/petroleum/rust and independent sprites. Extension, not redesign.
+- Modes: world Experience; terminal/scanner Operate; manual Read.
+- First viewport: harbor and concrete daily request. Phone stacks world and interaction; terminal/scanner hide the world to preserve legibility.
+- Loop: receive request → depot → inspect records/crate → real SQL → two scanner windows → collect returned IDs → return → validate and install.
+- Signature: timing reveals the real SQL result; it cannot turn wrong code into correct cargo. Untimed mode has identical progression.
+- Two scenes, named hotspots with explicit selected feedback. No free walking, joystick, time pressure or penalties.
+- Artwork: original courtyard and sprites preserved; new depot background, provenance recorded.
+- Limits: one mission/day, static poses, staged installation, no audio, account, sync or guaranteed offline.
+- Verify 1440px desktop, 360px phone and 320px overflow; real timing, errors, pause, checkpoints, SQL, return and completion.
