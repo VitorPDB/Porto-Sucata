@@ -3,10 +3,15 @@
   "projectId": "prj_KZser93HmHNBbRFfa8veynMQrDYN",
   "teamId": "team_VneHRHB9ulmmfjjE6Z4ECNxb",
   "productionUrl": "https://porto-sucata.vercel.app",
-  "deploymentId": "dpl_BMkZ4QzBhtu5tXYKMx2ZQqnP962w",
-  "sourceCommit": "ba062ed",
-  "method": "direct-upload-of-built-dist",
-  "gitIntegration": false,
+  "deploymentId": "dpl_AH1SrCUwT8M2EGA36ijhXJToTQME",
+  "sourceCommit": "b398d96466efb8a33aeda380bd760f8721c409e2",
+  "method": "git-integration-vite-build",
+  "gitIntegration": true,
   "outputDirectory": "dist",
-  "otherProjectsMustNotChange": ["so na rede", "dados-em-curso"]
+  "otherProjectsMustNotChange": [
+    "so na rede",
+    "dados-em-curso"
+  ],
+  "verifiedAt": "2026-10-31",
+  "verification": "8 Node tests, 3 local Playwright tests and 3 production Playwright tests passed."
 }
